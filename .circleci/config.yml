@@ -60,4 +60,3 @@ workflows:
       - test:
           requires:
             - build
-  The config

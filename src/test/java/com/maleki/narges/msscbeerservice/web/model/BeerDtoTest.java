@@ -2,6 +2,7 @@ package com.maleki.narges.msscbeerservice.web.model;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.maleki.narges.msscbeerservice.bootstrap.BeerLoader;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.json.JsonTest;
@@ -24,7 +25,7 @@ class BeerDtoTest {
                 .id(UUID.randomUUID())
                 .beerName("new beer")
                 .beerStyle(BeerStyleEnum.BEER1)
-                .upc(37238L)
+                .upc(BeerLoader.BEER_1_UPC)
                 .price(new BigDecimal(12.99).setScale(2, RoundingMode.HALF_UP))
                 .createdDate(OffsetDateTime.now())
                 .lastModifiedDate(OffsetDateTime.now())
@@ -40,8 +41,7 @@ class BeerDtoTest {
     @Test
     void testDeserialize() throws JsonProcessingException {
         String json = objectMapper.writeValueAsString(this.getBeerDto());
-
-       BeerDto dto = objectMapper.readValue(json,BeerDto.class);
+        BeerDto dto = objectMapper.readValue(json,BeerDto.class);
         System.out.println(dto);
 
     }

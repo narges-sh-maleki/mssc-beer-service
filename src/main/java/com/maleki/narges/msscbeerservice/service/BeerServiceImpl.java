@@ -5,10 +5,17 @@ import com.maleki.narges.msscbeerservice.repositories.BeerRepository;
 import com.maleki.narges.msscbeerservice.web.controller.NotFoundException;
 import com.maleki.narges.msscbeerservice.web.mapper.BeerMapper;
 import com.maleki.narges.msscbeerservice.web.model.BeerDto;
+import com.maleki.narges.msscbeerservice.web.model.BeerPagedList;
+import com.maleki.narges.msscbeerservice.web.model.BeerStyleEnum;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -35,4 +42,28 @@ public class BeerServiceImpl implements BeerService {
         beer = beerRepository.save(beer);
         return beerMapper.beerToBeerDto(beer);
     }
+
+    @Override
+    public BeerPagedList listBeers(String beerName, BeerStyleEnum beerStyle, Pageable pageInfo) {
+        Page<Beer> beerPage;
+        if (!StringUtils.isEmpty(beerName) && beerStyle!=null)
+            beerPage = beerRepository.findByBeerNameContainingAndBeerStyleIgnoreCase(beerName,beerStyle.toString(),pageInfo);
+        else if (!StringUtils.isEmpty(beerName) && beerStyle==null)
+           // beerPage = beerRepository.findByBeerNameLike("%"+beerName+"%",pageInfo);
+            //findByTitleContainingIgnoreCase
+            beerPage = beerRepository.findByBeerNameContainingIgnoreCase(beerName,pageInfo);
+
+        else if (StringUtils.isEmpty(beerName) && beerStyle!=null)
+            beerPage = beerRepository.findByBeerStyle(beerStyle.toString(),pageInfo);
+        else
+            beerPage = beerRepository.findAll(pageInfo);
+
+        return new BeerPagedList(
+                beerPage.getContent().stream().map(beerMapper::beerToBeerDto).collect(Collectors.toList()),
+                pageInfo,
+                beerPage.getTotalElements());
+
+
+    }
+
 }

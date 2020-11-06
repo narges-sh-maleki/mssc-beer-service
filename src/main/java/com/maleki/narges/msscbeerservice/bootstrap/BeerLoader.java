@@ -6,8 +6,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
-
-@Component
+//It is commented!!! so the data is loaded via data.sql because we cannot generate Id by ourself since hibernate autogenerat
+//@Component
 public class BeerLoader implements CommandLineRunner {
 
     public final static String BEER_1_UPC = "0631234200036";

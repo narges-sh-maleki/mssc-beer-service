@@ -24,16 +24,19 @@ public class BeerServiceImpl implements BeerService {
     private final BeerMapper beerMapper;
 
     @Override
-    public BeerDto getBeerById(UUID beerId) {
+    public BeerDto getBeerById(UUID beerId,Boolean showInventory) {
         Beer beer = beerRepository.findById(beerId).orElseThrow(NotFoundException::new);
-        return beerMapper.beerToBeerDto(beer);
+        if (showInventory)
+            return beerMapper.beerToBeerDtoWithInventory(beer);
+        else
+            return beerMapper.beerToBeerDto(beer);
     }
 
     @Override
     public BeerDto saveNewBeer(BeerDto beerDto) {
 
-       Beer beer =  beerRepository.save(beerMapper.beerDtoToBeer(beerDto));
-       return beerMapper.beerToBeerDto(beer);
+        Beer beer = beerRepository.save(beerMapper.beerDtoToBeer(beerDto));
+        return beerMapper.beerToBeerDto(beer);
     }
 
     @Override
@@ -44,25 +47,36 @@ public class BeerServiceImpl implements BeerService {
     }
 
     @Override
-    public BeerPagedList listBeers(String beerName, BeerStyleEnum beerStyle, Pageable pageInfo) {
+    public BeerPagedList listBeers(String beerName, BeerStyleEnum beerStyle, Boolean showInventory, Pageable pageInfo) {
         Page<Beer> beerPage;
-        if (!StringUtils.isEmpty(beerName) && beerStyle!=null)
-            beerPage = beerRepository.findByBeerNameContainingAndBeerStyleIgnoreCase(beerName,beerStyle.toString(),pageInfo);
-        else if (!StringUtils.isEmpty(beerName) && beerStyle==null)
-           // beerPage = beerRepository.findByBeerNameLike("%"+beerName+"%",pageInfo);
+        if (!StringUtils.isEmpty(beerName) && beerStyle != null)
+            beerPage = beerRepository.findByBeerNameContainingAndBeerStyleIgnoreCase(beerName, beerStyle.toString(), pageInfo);
+        else if (!StringUtils.isEmpty(beerName) && beerStyle == null)
+            // beerPage = beerRepository.findByBeerNameLike("%"+beerName+"%",pageInfo);
             //findByTitleContainingIgnoreCase
-            beerPage = beerRepository.findByBeerNameContainingIgnoreCase(beerName,pageInfo);
+            beerPage = beerRepository.findByBeerNameContainingIgnoreCase(beerName, pageInfo);
 
-        else if (StringUtils.isEmpty(beerName) && beerStyle!=null)
-            beerPage = beerRepository.findByBeerStyle(beerStyle.toString(),pageInfo);
+        else if (StringUtils.isEmpty(beerName) && beerStyle != null)
+            beerPage = beerRepository.findByBeerStyle(beerStyle.toString(), pageInfo);
         else
             beerPage = beerRepository.findAll(pageInfo);
 
-        return new BeerPagedList(
-                beerPage.getContent().stream().map(beerMapper::beerToBeerDto).collect(Collectors.toList()),
-                pageInfo,
-                beerPage.getTotalElements());
 
+        BeerPagedList beerPagedList;
+
+        if (showInventory) {
+            beerPagedList = new BeerPagedList(
+                    beerPage.getContent().stream().map(beerMapper::beerToBeerDtoWithInventory).collect(Collectors.toList()),
+                    pageInfo,
+                    beerPage.getTotalElements());
+        } else {
+            beerPagedList = new BeerPagedList(
+                    beerPage.getContent().stream().map(beerMapper::beerToBeerDto).collect(Collectors.toList()),
+                    pageInfo,
+                    beerPage.getTotalElements());
+        }
+
+        return beerPagedList;
 
     }
 

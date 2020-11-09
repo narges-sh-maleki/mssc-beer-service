@@ -29,21 +29,30 @@ public class BeerController {
     @GetMapping
     public ResponseEntity<BeerPagedList> listBeers(@RequestParam(required = false) String beerName,
                                                    @RequestParam(required = false) BeerStyleEnum beerStyle,
+                                                   @RequestParam(required = false) Boolean showInventory,
                                                    @RequestParam(required = false) Integer pageNumber,
                                                    @RequestParam(required = false) Integer pageSize){
+
+        if (showInventory == null)
+            showInventory = false;
         if (pageNumber == null || pageNumber <1)
             pageNumber = DEFAULT_PAGE_NUMBER;
         if (pageSize == null || pageSize<1)
             pageSize = DEFAULT_PAGE_SIZE;
 
-        return new ResponseEntity<>(beerService.listBeers(beerName,beerStyle, PageRequest.of(pageNumber,pageSize)),HttpStatus.OK);
+        return new ResponseEntity<>(beerService.listBeers(beerName,beerStyle, showInventory,PageRequest.of(pageNumber,pageSize)),HttpStatus.OK);
 
     }
 
 
     @GetMapping("{beerId}")
-    public ResponseEntity<BeerDto> getBeerById(@PathVariable UUID beerId){
-        return new ResponseEntity<>(beerService.getBeerById(beerId), HttpStatus.OK);
+    public ResponseEntity<BeerDto> getBeerById(@PathVariable UUID beerId,
+                                               @RequestParam(required = false) Boolean showInventory){
+
+        if (showInventory == null)
+            showInventory = false;
+
+        return new ResponseEntity<>(beerService.getBeerById(beerId,showInventory), HttpStatus.OK);
     }
 
     @PostMapping()

@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 
-public abstract  class BeerMapperDecorator implements BeerMapper {
+public abstract   class BeerMapperDecorator implements BeerMapper {
 
     @Autowired
     private  BeerMapper beerMapper;
@@ -21,12 +21,19 @@ public abstract  class BeerMapperDecorator implements BeerMapper {
     }
 
     @Override
-    public BeerDto beerToBeerDto(Beer beer) {
-
+    public BeerDto beerToBeerDtoWithInventory(Beer beer) {
         Integer quantity = beerInventoryService.getBeerInventory(beer.getId());
         BeerDto dto = beerMapper.beerToBeerDto(beer);
         dto.setQuantityOnHand(quantity);
-        System.out.println(dto);
+
         return dto;
     }
+
+    @Override
+    public BeerDto beerToBeerDto(Beer beer) {
+
+        return beerMapper.beerToBeerDto(beer);
+    }
+
+
 }

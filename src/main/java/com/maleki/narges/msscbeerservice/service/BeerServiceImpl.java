@@ -8,6 +8,8 @@ import com.maleki.narges.msscbeerservice.web.model.BeerDto;
 import com.maleki.narges.msscbeerservice.web.model.BeerPagedList;
 import com.maleki.narges.msscbeerservice.web.model.BeerStyleEnum;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -24,7 +26,10 @@ public class BeerServiceImpl implements BeerService {
     private final BeerMapper beerMapper;
 
     @Override
+    @Cacheable(cacheNames = "beerCache", key = "#beerId",condition = "#showInventory == false ")
     public BeerDto getBeerById(UUID beerId,Boolean showInventory) {
+
+        System.out.println("I was called");
         Beer beer = beerRepository.findById(beerId).orElseThrow(NotFoundException::new);
         if (showInventory)
             return beerMapper.beerToBeerDtoWithInventory(beer);
@@ -47,7 +52,11 @@ public class BeerServiceImpl implements BeerService {
     }
 
     @Override
+    @Cacheable(cacheNames = "beerListCache", condition = "#showInventory == false")
     public BeerPagedList listBeers(String beerName, BeerStyleEnum beerStyle, Boolean showInventory, Pageable pageInfo) {
+
+        System.out.println("I was called");
+
         Page<Beer> beerPage;
         if (!StringUtils.isEmpty(beerName) && beerStyle != null)
             beerPage = beerRepository.findByBeerNameContainingAndBeerStyleIgnoreCase(beerName, beerStyle.toString(), pageInfo);

@@ -1,6 +1,7 @@
 package com.maleki.narges.msscbeerservice.service.inventory;
 
 import com.maleki.narges.msscbeerservice.service.inventory.model.BeerInventoryDto;
+import com.maleki.narges.msscbeerservice.web.controller.NotFoundException;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -33,6 +34,8 @@ public class BeerInventoryRestTemplateServiceImpl implements BeerInventoryServic
     public Integer getBeerInventory(UUID beerId) {
         String url = beerInventoryServiceHost + INVENTORY_PATH;
         BeerInventoryDto[] beerInventoryDtoList = restTemplate.getForObject(url,BeerInventoryDto[].class,beerId);
+        if (beerInventoryDtoList == null)
+            throw new NotFoundException();
         return Arrays.stream(beerInventoryDtoList).
                 mapToInt(i->i.getQuantityOnHand()).
                 reduce((a,b)->{return a+b;} ).orElse(-1);

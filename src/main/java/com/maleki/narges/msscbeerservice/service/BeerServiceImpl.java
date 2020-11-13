@@ -59,14 +59,14 @@ public class BeerServiceImpl implements BeerService {
 
         Page<Beer> beerPage;
         if (!StringUtils.isEmpty(beerName) && beerStyle != null)
-            beerPage = beerRepository.findByBeerNameContainingAndBeerStyleIgnoreCase(beerName, beerStyle.toString(), pageInfo);
+            beerPage = beerRepository.findByBeerNameContainingAndBeerStyleIgnoreCase(beerName, beerStyle.toString(), pageInfo).orElseThrow(()-> new NotFoundException());
         else if (!StringUtils.isEmpty(beerName) && beerStyle == null)
             // beerPage = beerRepository.findByBeerNameLike("%"+beerName+"%",pageInfo);
             //findByTitleContainingIgnoreCase
-            beerPage = beerRepository.findByBeerNameContainingIgnoreCase(beerName, pageInfo);
+            beerPage = beerRepository.findByBeerNameContainingIgnoreCase(beerName, pageInfo).orElseThrow(()-> new NotFoundException());
 
         else if (StringUtils.isEmpty(beerName) && beerStyle != null)
-            beerPage = beerRepository.findByBeerStyle(beerStyle.toString(), pageInfo);
+            beerPage = beerRepository.findByBeerStyle(beerStyle.toString(), pageInfo).orElseThrow(()-> new NotFoundException());
         else
             beerPage = beerRepository.findAll(pageInfo);
 
@@ -87,6 +87,21 @@ public class BeerServiceImpl implements BeerService {
 
         return beerPagedList;
 
+    }
+
+    @Cacheable(cacheNames = "beerUpcCache",key = "#upc" ,condition = "#showInventory == false ")
+    @Override
+    public BeerDto getBeerByUpc(String upc, Boolean showInventory) {
+        BeerDto beerDto;
+        if (showInventory){
+            beerDto = beerMapper.beerToBeerDtoWithInventory( beerRepository.findByUpc(upc).orElseThrow(NotFoundException::new));
+        }
+        else {
+            beerDto = beerMapper.beerToBeerDto( beerRepository.findByUpc(upc).orElseThrow(NotFoundException::new));
+
+        }
+
+        return beerDto;
     }
 
 }

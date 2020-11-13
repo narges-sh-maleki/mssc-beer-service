@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.json.JsonTest;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.OffsetDateTime;
@@ -39,7 +40,7 @@ class BeerDtoTest {
     }
 
     @Test
-    void testDeserialize() throws JsonProcessingException {
+    void testDeserialize() throws IOException {
         String json = objectMapper.writeValueAsString(this.getBeerDto());
         BeerDto dto = objectMapper.readValue(json,BeerDto.class);
         System.out.println(dto);

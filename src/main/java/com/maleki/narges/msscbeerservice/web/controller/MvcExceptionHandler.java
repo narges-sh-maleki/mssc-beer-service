@@ -13,4 +13,9 @@ public class MvcExceptionHandler {
     public ResponseEntity handleMethodArgumentNotValidException(MethodArgumentNotValidException e){
         return new ResponseEntity("Not valid POJO", HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity handleNotFoundException(NotFoundException e){
+        return new ResponseEntity("Not Found ExceptionO", HttpStatus.BAD_REQUEST);
+    }
 }

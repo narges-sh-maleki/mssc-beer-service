@@ -26,9 +26,12 @@ public class JmsConfig {
 
         MappingJackson2MessageConverter messageConverter = new MappingJackson2MessageConverter();
         messageConverter.setTargetType(MessageType.TEXT);
+
+       /* HashMap<String, Class<?>> typeIdMappings = new HashMap<>();
+        typeIdMappings.put(NewInventoryEvent.class.getSimpleName(), NewInventoryEvent.class);
+        messageConverter.setTypeIdMappings(typeIdMappings);*/
+
         messageConverter.setTypeIdPropertyName("_type");
-      //  objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-       // objectMapper.registerModule(new JavaTimeModule());
         messageConverter.setObjectMapper(objectMapper);
         return messageConverter;
     }

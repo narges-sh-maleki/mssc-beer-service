@@ -1,4 +1,4 @@
-package com.maleki.narges.msscbeerservice.events;
+package common.events;
 
 import com.maleki.narges.msscbeerservice.web.model.BeerDto;
 import lombok.NoArgsConstructor;

@@ -47,4 +47,7 @@ public class BeerDto implements Serializable {
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     private BigDecimal price;
     private Integer quantityOnHand;
+
+
+
 }

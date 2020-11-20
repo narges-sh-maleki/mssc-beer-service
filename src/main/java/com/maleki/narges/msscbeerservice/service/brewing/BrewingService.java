@@ -2,7 +2,7 @@ package com.maleki.narges.msscbeerservice.service.brewing;
 
 import com.maleki.narges.msscbeerservice.config.JmsConfig;
 import com.maleki.narges.msscbeerservice.domain.Beer;
-import com.maleki.narges.msscbeerservice.events.BrewBeerEvent;
+import common.events.BrewBeerEvent;
 import com.maleki.narges.msscbeerservice.repositories.BeerRepository;
 import com.maleki.narges.msscbeerservice.service.inventory.BeerInventoryService;
 import com.maleki.narges.msscbeerservice.web.mapper.BeerMapper;

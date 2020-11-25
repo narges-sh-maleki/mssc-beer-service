@@ -4,18 +4,16 @@ import com.maleki.narges.msscbeerservice.domain.Beer;
 import com.maleki.narges.msscbeerservice.repositories.BeerRepository;
 import com.maleki.narges.msscbeerservice.web.controller.NotFoundException;
 import com.maleki.narges.msscbeerservice.web.mapper.BeerMapper;
-import com.maleki.narges.msscbeerservice.web.model.BeerDto;
-import com.maleki.narges.msscbeerservice.web.model.BeerPagedList;
-import com.maleki.narges.msscbeerservice.web.model.BeerStyleEnum;
+import guru.sfg.brewery.common.BeerDto;
+import guru.sfg.brewery.common.BeerPagedList;
+import guru.sfg.brewery.common.BeerStyleEnum;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.cache.annotation.Caching;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 

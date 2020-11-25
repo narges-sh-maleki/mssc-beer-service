@@ -2,12 +2,11 @@ package com.maleki.narges.msscbeerservice.bootstrap;
 
 import com.maleki.narges.msscbeerservice.domain.Beer;
 import com.maleki.narges.msscbeerservice.repositories.BeerRepository;
-import com.maleki.narges.msscbeerservice.web.model.BeerStyleEnum;
+import guru.sfg.brewery.common.BeerStyleEnum;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
-import java.util.UUID;
 
 //It was commented. so the data is loaded via data.sql because we cannot generate Id by ourself since hibernate autogenerat
 @Component

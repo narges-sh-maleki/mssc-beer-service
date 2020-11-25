@@ -1,6 +1,6 @@
-package common.events;
+package guru.sfg.brewery.common.events;
 
-import com.maleki.narges.msscbeerservice.web.model.BeerDto;
+import guru.sfg.brewery.common.BeerDto;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor

@@ -3,6 +3,8 @@ package com.maleki.narges.msscbeerservice.web.model;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.maleki.narges.msscbeerservice.bootstrap.BeerLoader;
+import guru.sfg.brewery.common.BeerDto;
+import guru.sfg.brewery.common.BeerStyleEnum;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

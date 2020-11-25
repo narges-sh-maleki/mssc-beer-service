@@ -1,9 +1,8 @@
 package com.maleki.narges.msscbeerservice.service;
 
-import com.maleki.narges.msscbeerservice.web.model.BeerDto;
-import com.maleki.narges.msscbeerservice.web.model.BeerPagedList;
-import com.maleki.narges.msscbeerservice.web.model.BeerStyleEnum;
-import org.springframework.data.domain.PageRequest;
+import guru.sfg.brewery.common.BeerDto;
+import guru.sfg.brewery.common.BeerPagedList;
+import guru.sfg.brewery.common.BeerStyleEnum;
 import org.springframework.data.domain.Pageable;
 
 import java.util.UUID;

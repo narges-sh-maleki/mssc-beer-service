@@ -2,9 +2,8 @@ package com.maleki.narges.msscbeerservice.web.mapper;
 
 import com.maleki.narges.msscbeerservice.domain.Beer;
 import com.maleki.narges.msscbeerservice.service.inventory.BeerInventoryService;
-import com.maleki.narges.msscbeerservice.web.model.BeerDto;
+import guru.sfg.brewery.common.BeerDto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 
 public abstract   class BeerMapperDecorator implements BeerMapper {

@@ -2,10 +2,10 @@ package com.maleki.narges.msscbeerservice.service.brewing;
 
 import com.maleki.narges.msscbeerservice.config.JmsConfig;
 import com.maleki.narges.msscbeerservice.domain.Beer;
-import common.events.BrewBeerEvent;
-import common.events.NewInventoryEvent;
+import guru.sfg.brewery.common.events.BrewBeerEvent;
+import guru.sfg.brewery.common.events.NewInventoryEvent;
 import com.maleki.narges.msscbeerservice.repositories.BeerRepository;
-import com.maleki.narges.msscbeerservice.web.model.BeerDto;
+import guru.sfg.brewery.common.BeerDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jms.annotation.JmsListener;

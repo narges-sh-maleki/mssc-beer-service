@@ -1,7 +1,7 @@
 package com.maleki.narges.msscbeerservice.web.mapper;
 
 import com.maleki.narges.msscbeerservice.domain.Beer;
-import com.maleki.narges.msscbeerservice.web.model.BeerDto;
+import guru.sfg.brewery.common.BeerDto;
 import org.mapstruct.DecoratedWith;
 import org.mapstruct.Mapper;
 

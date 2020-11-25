@@ -1,4 +1,4 @@
-package com.maleki.narges.msscbeerservice.web.model;
+package guru.sfg.brewery.common;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;

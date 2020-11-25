@@ -1,19 +1,17 @@
 package com.maleki.narges.msscbeerservice.web.controller;
 
 import com.maleki.narges.msscbeerservice.service.BeerService;
-import com.maleki.narges.msscbeerservice.web.model.BeerDto;
-import com.maleki.narges.msscbeerservice.web.model.BeerPagedList;
-import com.maleki.narges.msscbeerservice.web.model.BeerStyleEnum;
+import guru.sfg.brewery.common.BeerDto;
+import guru.sfg.brewery.common.BeerPagedList;
+import guru.sfg.brewery.common.BeerStyleEnum;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import lombok.val;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.UUID;
 
 @Slf4j

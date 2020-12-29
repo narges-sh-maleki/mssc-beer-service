@@ -12,8 +12,11 @@ public class JmsConfig {
 
     public static final String BREWING_REQUEST_QUEUE = "brewing-request";
     public static final String NEW_INVENTORY_QUEUE = "new-inventory-request";
+    public static final String VALIDATE_ORDER_RESULT = "validate-order-result";
+    public final static String VALIDATE_ORDER = "validate-order";
 
-   /* @Bean
+
+  /* @Bean
     public ObjectMapper objectMapper() {
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);

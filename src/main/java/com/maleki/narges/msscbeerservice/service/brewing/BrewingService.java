@@ -25,7 +25,7 @@ public class BrewingService {
     private  BrewBeerEvent brewBeerEvent;
     private final BeerMapper beerMapper;
 
-    @Scheduled(fixedRate = 30000)
+    @Scheduled(fixedRate = 5000)
     public void checkForLowInventory(){
 
         List<Beer> beerList = beerRepository.findAll();

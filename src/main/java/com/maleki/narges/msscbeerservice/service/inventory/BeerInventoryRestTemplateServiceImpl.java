@@ -5,22 +5,21 @@ import com.maleki.narges.msscbeerservice.web.controller.NotFoundException;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.UUID;
 
 @Service
 @Setter
 @ConfigurationProperties(prefix = "sfg.brewery")
+@Profile("!local-discovery")
 public class BeerInventoryRestTemplateServiceImpl implements BeerInventoryService {
 
     private  final RestTemplate restTemplate;
-    private final static String INVENTORY_PATH = "/api/v1/beer/{beerId}/inventory";
+    public final static String INVENTORY_PATH = "/api/v1/beer/{beerId}/inventory";
     private String beerInventoryServiceHost;
 
     public BeerInventoryRestTemplateServiceImpl(RestTemplateBuilder restTemplateBuilder) {

@@ -16,13 +16,13 @@ import java.util.UUID;
 @Setter
 @ConfigurationProperties(prefix = "sfg.brewery")
 @Profile("!local-discovery")
-public class BeerInventoryRestTemplateServiceImpl implements BeerInventoryService {
+public class BeerInventoryService_RestTemplateImpl implements BeerInventoryService {
 
     private  final RestTemplate restTemplate;
     public final static String INVENTORY_PATH = "/api/v1/beer/{beerId}/inventory";
     private String beerInventoryServiceHost;
 
-    public BeerInventoryRestTemplateServiceImpl(RestTemplateBuilder restTemplateBuilder) {
+    public BeerInventoryService_RestTemplateImpl(RestTemplateBuilder restTemplateBuilder) {
         this.restTemplate = restTemplateBuilder.build();
     }
 

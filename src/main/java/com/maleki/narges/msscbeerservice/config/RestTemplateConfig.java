@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.web.client.RestTemplate;
 
 @Configuration
-@Profile("local-discovery")
+//@Profile("local-discovery")
 public class RestTemplateConfig {
 
 

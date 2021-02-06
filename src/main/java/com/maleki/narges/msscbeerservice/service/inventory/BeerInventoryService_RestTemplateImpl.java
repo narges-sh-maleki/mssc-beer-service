@@ -17,7 +17,7 @@ import java.util.UUID;
 @Service
 @Setter
 @ConfigurationProperties(prefix = "sfg.brewery")
-@Profile("local-discovery")
+//@Profile("local-discovery")
 public class BeerInventoryService_RestTemplateImpl implements BeerInventoryService {
 
    @Qualifier("lbRestTemplate")

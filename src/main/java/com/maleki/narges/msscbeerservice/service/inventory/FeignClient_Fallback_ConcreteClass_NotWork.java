@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Component
-@Profile("local-discovery")
+@Profile("temporarily disabled local-discovery")
 @RequiredArgsConstructor
 public class FeignClient_Fallback_ConcreteClass_NotWork implements FeignClient_HappyPath {
     //private final FeignClient_SadPath feignClient_sadPath;

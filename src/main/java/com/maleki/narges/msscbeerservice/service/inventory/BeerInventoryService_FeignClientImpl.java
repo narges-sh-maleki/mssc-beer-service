@@ -13,7 +13,7 @@ import java.util.UUID;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-@Profile("local-discovery")
+@Profile("temporarily disabled local-discovery")
 public class BeerInventoryService_FeignClientImpl implements BeerInventoryService {
 
     private final FeignClient_HappyPath beerInventoryFeignClient;

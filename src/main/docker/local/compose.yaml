@@ -27,6 +27,7 @@ services:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-user:eureka-pass@eureka:8762/eureka/
       EUREKA_INSTANCE_PREFER_IP_ADDRESS: 'true'
 
+
   inventory-service:
     image: nargesshmaleki/mssc-beer-inventory-service
     ports:
@@ -42,5 +43,84 @@ services:
       SPRING_ARTEMIS_HOST: jms
       SPRING_DATASOURCE_URL: jdbc:mysql://host.docker.internal:3306/beerinventoryservice?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
       EUREKA_INSTANCE_PREFER_IP_ADDRESS: 'true'
-    #restart: on-failure
+    restart: on-failure
 
+
+
+#  inventory-failover-service:
+#    image: nargesshmaleki/mssc-beer-inventory-failover-service
+#    ports:
+#      - 8084:8084
+#    depends_on:
+#      - eureka
+#      - config
+#    environment:
+#      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-user:eureka-pass@eureka:8762/eureka/
+#      EUREKA_INSTANCE_PREFER_IP_ADDRESS: 'true'
+#
+#
+#
+#  beer-service:
+#    image: nargesshmaleki/mssc-beer-service
+#    ports:
+#      - 8080:8080
+#    depends_on:
+#      - eureka
+#      - config
+#      - jms
+#      - inventory-service
+#    environment:
+#      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-user:eureka-pass@eureka:8762/eureka/
+#      SPRING_PROFILES_ACTIVE: local-discovery, localmysql
+#      SPRING_ZIPKIN_BASEURL: http://zipkin
+#      SPRING_ARTEMIS_HOST: jms
+#      SPRING_DATASOURCE_URL: jdbc:mysql://host.docker.internal:3306/beerservice?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+#      EUREKA_INSTANCE_PREFER_IP_ADDRESS: 'true'
+#
+#
+#
+#  order-service:
+#    image: nargesshmaleki/mssc-beer-order-service
+#    ports:
+#      - 8081:8081
+#    depends_on:
+#      - eureka
+#      - config
+#      - jms
+#      - beer-service
+#    environment:
+#      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-user:eureka-pass@eureka:8762/eureka/
+#      SPRING_PROFILES_ACTIVE: local-discovery, localmysql
+#      SPRING_ZIPKIN_BASEURL: http://zipkin
+#      SPRING_ARTEMIS_HOST: jms
+#      SPRING_DATASOURCE_URL: jdbc:mysql://host.docker.internal:3306/beerorderservice?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+#      EUREKA_INSTANCE_PREFER_IP_ADDRESS: 'true'
+#      SFG_BEERSERVICEHOST: http://beer-service:8080
+#
+#
+#
+#  gateway:
+#    image: nargesshmaleki/mssc-brewery-gateway
+#    ports:
+#      - 9090:9090
+#    depends_on:
+#      - eureka
+#      - config
+#      - beer-service
+#      - order-service
+#      - inventory-service
+#      - inventory-failover-service
+#    environment:
+#      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-user:eureka-pass@eureka:8762/eureka/
+#      SPRING_PROFILES_ACTIVE: local-discovery
+#      SPRING_ZIPKIN_BASEURL: http://zipkin
+#      EUREKA_INSTANCE_PREFER_IP_ADDRESS: 'true'
+#
+
+
+
+
+
+#eureka_client_serviceurl_defaultzone=http://eureka-user:eureka-pass@104.248.51.53:8762/eureka/
+#eureka_instance_prefer_ip_address=true
+#eureka.instance.ip-address=104.248.51.132
